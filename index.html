@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HSE AI Platform | سامي الأسمري</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div><h1>HSE AI Platform</h1><p>منصة الصحة والسلامة المهنية الذكية</p></div>
+    <span>تطوير: سامي الأسمري</span>
+  </header>
+  <main class="layout">
+    <section class="cards">
+      <div class="card"><b id="projectsCount">0</b><span>المشاريع</span></div>
+      <div class="card"><b id="reportsCount">0</b><span>التقارير</span></div>
+      <div class="card"><b id="openCount">0</b><span>مخالفات مفتوحة</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>إنشاء تقرير سلامة احترافي</h2>
+      <form id="reportForm">
+        <div class="grid">
+          <label>اسم المشروع<input name="projectName" placeholder="مثال: مخطط درة الجنوب" required></label>
+          <label>مسؤول السلامة<input name="safetyOfficer" placeholder="سامي الأسمري"></label>
+          <label>مدير المشروع<input name="projectManager" placeholder="اسم مدير المشروع"></label>
+          <label>موقع المخالفة<input name="location" placeholder="مثال: طريق 2"></label>
+        </div>
+        <h3>المخالفات المرصودة</h3>
+        <div id="violations"></div>
+        <button type="button" class="secondary" onclick="addViolation()">+ إضافة مخالفة</button>
+        <label class="full">صور المخالفات<input type="file" name="images" multiple accept="image/*"></label>
+        <label class="full">ملاحظات عامة<textarea name="notes" rows="3" placeholder="اكتب الملاحظات العامة"></textarea></label>
+        <button>حفظ التقرير وتوليد النموذج</button>
+      </form>
+    </section>
+
+    <section class="panel report-area" id="reportArea" hidden>
+      <div class="report-head"><h2>تقرير صحة وسلامة مهنية</h2><p id="reportMeta"></p></div>
+      <div id="reportContent"></div>
+      <button onclick="window.print()">طباعة / حفظ PDF</button>
+    </section>
+
+    <section class="panel">
+      <h2>التقارير المحفوظة</h2>
+      <div id="reportsList" class="list"></div>
+    </section>
+  </main>
+  <footer>© منصة HSE AI — تطوير سامي الأسمري</footer>
+  <script src="/app.js"></script>
+</body>
+</html>
