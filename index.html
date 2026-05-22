@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HSE AI Pro | منصة السلامة المهنية</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">HSE</div>
+      <div><h1>HSE AI Pro</h1><p>بواسطة سامي الأسمري</p></div>
+    </div>
+    <button class="nav active" data-page="dashboard">لوحة التحكم</button>
+    <button class="nav" data-page="newReport">تقرير جديد</button>
+    <button class="nav" data-page="reports">التقارير المحفوظة</button>
+    <button class="nav" data-page="projects">المشاريع</button>
+    <button class="nav" data-page="risks">تقييم المخاطر</button>
+  </aside>
+  <main>
+    <header class="topbar"><div><h2 id="pageTitle">لوحة التحكم</h2><p>منصة ذكية لإدارة تقارير الصحة والسلامة المهنية</p></div><button onclick="window.print()" class="ghost">طباعة / PDF</button></header>
+
+    <section id="dashboard" class="page show">
+      <div class="cards">
+        <div class="card stat"><span>إجمالي التقارير</span><strong id="statReports">0</strong></div>
+        <div class="card stat"><span>المشاريع</span><strong id="statProjects">0</strong></div>
+        <div class="card stat"><span>ملاحظات مفتوحة</span><strong id="statOpen">0</strong></div>
+        <div class="card stat danger"><span>عالية الخطورة</span><strong id="statHigh">0</strong></div>
+      </div>
+      <div class="card"><h3>آخر التقارير</h3><div id="latestReports" class="table"></div></div>
+    </section>
+
+    <section id="newReport" class="page">
+      <div class="grid two">
+        <form id="reportForm" class="card form">
+          <h3>إنشاء تقرير سلامة</h3>
+          <label>المشروع<select name="project_id" id="projectSelect"></select></label>
+          <label>اسم المشروع يدويًا<input name="project_name" placeholder="اختياري إذا لم تختر مشروع" /></label>
+          <label>الموقع<input name="location" placeholder="مثال: جدة - مخطط درة الجنوب" /></label>
+          <label>مسؤول السلامة<input name="inspector" value="سامي الأسمري" /></label>
+          <label>تاريخ التقرير<input name="report_date" type="date" /></label>
+          <label>نوع المخالفة<input name="violation_type" placeholder="مثال: عدم تأمين حفريات" /></label>
+          <label>مستوى الخطورة<select name="risk_level"><option>منخفض</option><option selected>متوسط</option><option>عالي</option></select></label>
+          <label>الحالة<select name="status"><option selected>مفتوح</option><option>تحت المعالجة</option><option>مغلق</option></select></label>
+          <label class="full">وصف الملاحظة<textarea name="observation" rows="5" placeholder="اكتب الملاحظة كما شاهدتها في الموقع"></textarea></label>
+          <label class="full">إجراءات إضافية<textarea name="actions" rows="3" placeholder="اختياري"></textarea></label>
+          <label class="full">صورة المخالفة<input name="image" type="file" accept="image/*" /></label>
+          <button class="primary" type="submit">توليد وحفظ التقرير</button>
+        </form>
+        <div class="report paper" id="reportPreview">
+          <div class="paper-head"><div><h2>تقرير ملاحظة صحة وسلامة مهنية</h2><p>HSE Observation Report</p></div><div class="badge">AI</div></div>
+          <div class="meta"><span>رقم التقرير: —</span><span>التاريخ: —</span><span>الحالة: —</span></div>
+          <div class="empty">بعد التوليد سيظهر التقرير الاحترافي هنا.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reports" class="page"><div class="card"><h3>التقارير المحفوظة</h3><div id="reportsList" class="table"></div></div></section>
+
+    <section id="projects" class="page">
+      <div class="grid two">
+        <form id="projectForm" class="card form"><h3>إضافة مشروع</h3><label>اسم المشروع<input name="name" required /></label><label>الموقع<input name="location" /></label><label>مدير المشروع<input name="manager" /></label><button class="primary">حفظ المشروع</button></form>
+        <div class="card"><h3>قائمة المشاريع</h3><div id="projectsList" class="table"></div></div>
+      </div>
+    </section>
+
+    <section id="risks" class="page">
+      <div class="grid two">
+        <form id="riskForm" class="card form"><h3>تقييم مخاطر ذكي</h3><label class="full">النشاط<textarea name="activity" rows="4" placeholder="مثال: أعمال حفر بعمق 2 متر بجانب معدات ثقيلة"></textarea></label><button class="primary">تقييم المخاطر</button></form>
+        <div class="card"><h3>نتيجة التقييم</h3><div id="riskResult" class="risk-box">اكتب النشاط واضغط تقييم المخاطر.</div></div>
+      </div>
+      <div class="card"><h3>سجل تقييم المخاطر</h3><div id="risksList" class="table"></div></div>
+    </section>
+  </main>
+<script src="/app.js"></script>
+</body>
+</html>
