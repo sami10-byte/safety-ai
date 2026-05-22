@@ -6,216 +6,90 @@ const PORT = process.env.PORT || 3000;
 let reports = [];
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 
 app.get("/", (req, res) => {
   res.send(`
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>HSE AI</title>
-
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial;
-}
-
-body{
-  background:#f3f4f6;
-}
-
-.navbar{
-  background:#4c1d95;
-  color:white;
-  padding:18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.container{
-  padding:20px;
-}
-
-.hero,.card{
-  background:white;
-  padding:25px;
-  border-radius:18px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
-  margin-bottom:20px;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  margin-top:20px;
-}
-
-h1,h2{
-  color:#4c1d95;
-}
-
-.btn{
-  display:inline-block;
-  background:#4c1d95;
-  color:white;
-  padding:10px 18px;
-  border-radius:10px;
-  text-decoration:none;
-  margin-top:15px;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+body{background:#f3f4f6}
+.navbar{background:#4c1d95;color:white;padding:18px;display:flex;justify-content:space-between;align-items:center}
+.container{padding:20px}
+.hero,.card{background:white;padding:25px;border-radius:18px;box-shadow:0 5px 20px rgba(0,0,0,.08);margin-bottom:20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:20px}
+h1,h2{color:#4c1d95}
+.btn{display:inline-block;background:#4c1d95;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;margin-top:15px}
 </style>
 </head>
-
 <body>
-
 <div class="navbar">
-  <h1>HSE AI</h1>
-  <span>تطوير وإنشاء: سامي الأسمري</span>
+<h1>HSE AI</h1>
+<span>تطوير وإنشاء: سامي الأسمري</span>
 </div>
-
 <div class="container">
-
-  <div class="hero">
-    <h2>مرحباً سامي 👋</h2>
-    <p>منصة ذكية لإدارة تقارير الصحة والسلامة المهنية.</p>
-  </div>
-
-  <div class="cards">
-
-    <div class="card">
-      <h2>إنشاء تقرير</h2>
-      <p>إنشاء تقرير سلامة جديد.</p>
-      <a href="/reports" class="btn">فتح</a>
-    </div>
-
-    <div class="card">
-      <h2>التقارير المحفوظة</h2>
-      <p>عرض جميع التقارير السابقة.</p>
-      <a href="/saved" class="btn">عرض</a>
-    </div>
-
-  </div>
-
+<div class="hero">
+<h2>مرحباً سامي 👋</h2>
+<p>منصة ذكية لإدارة تقارير الصحة والسلامة المهنية.</p>
 </div>
-
+<div class="cards">
+<div class="card">
+<h2>إنشاء تقرير</h2>
+<p>إنشاء تقرير سلامة جديد بالذكاء الاصطناعي.</p>
+<a href="/reports" class="btn">فتح</a>
+</div>
+<div class="card">
+<h2>التقارير المحفوظة</h2>
+<p>عرض جميع التقارير السابقة.</p>
+<a href="/saved" class="btn">عرض</a>
+</div>
+</div>
+</div>
 </body>
 </html>
-  `);
+`);
 });
 
 app.get("/reports", (req, res) => {
   res.send(`
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>إنشاء تقرير</title>
-
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial;
-}
-
-body{
-  background:#f5f5f5;
-  padding:20px;
-}
-
-.container{
-  max-width:900px;
-  margin:auto;
-}
-
-.card{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  margin-bottom:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-h1,h2,h3{
-  color:#4c1d95;
-  margin-bottom:15px;
-}
-
-input,textarea,select{
-  width:100%;
-  padding:15px;
-  margin:10px 0 20px;
-  border-radius:12px;
-  border:1px solid #ddd;
-  font-size:16px;
-}
-
-button,.btn{
-  background:#4c1d95;
-  color:white;
-  border:none;
-  padding:14px 22px;
-  border-radius:12px;
-  font-size:16px;
-  text-decoration:none;
-  display:inline-block;
-  cursor:pointer;
-}
-
-.report-box{
-  line-height:2;
-  font-size:17px;
-}
-
-img{
-  width:100%;
-  border-radius:15px;
-  margin-top:15px;
-}
-
-@media print{
-  button,.btn,input,textarea,select{
-    display:none;
-  }
-
-  body{
-    background:white;
-  }
-
-  .card{
-    box-shadow:none;
-  }
-}
-
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+body{background:#f5f5f5;padding:20px}
+.container{max-width:900px;margin:auto}
+.card{background:white;padding:25px;border-radius:20px;margin-bottom:20px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+h1,h2,h3{color:#4c1d95;margin-bottom:15px}
+input,textarea,select{width:100%;padding:15px;margin:10px 0 20px;border-radius:12px;border:1px solid #ddd;font-size:16px}
+button,.btn{background:#4c1d95;color:white;border:none;padding:14px 22px;border-radius:12px;font-size:16px;text-decoration:none;display:inline-block;cursor:pointer;margin:5px}
+.report-box{line-height:2;font-size:17px}
+img{width:100%;border-radius:15px;margin-top:15px}
+.ai-box{background:#f3e8ff;border:1px solid #ddd;padding:15px;border-radius:15px;margin-bottom:20px}
+@media print{button,.btn,input,textarea,select,.ai-box{display:none}body{background:white}.card{box-shadow:none}}
 </style>
 </head>
-
 <body>
-
 <div class="container">
 
 <div class="card">
-
 <h1>إنشاء تقرير سلامة</h1>
 
-<input id="project" placeholder="اسم المشروع">
+<div class="ai-box">
+<h3>مساعد الذكاء الاصطناعي</h3>
+<textarea id="aiInput" rows="3" placeholder="اكتب المخالفة باختصار مثال: حفريات بدون حواجز"></textarea>
+<button onclick="generateAI()">تحسين التقرير بالذكاء الاصطناعي</button>
+</div>
 
+<input id="project" placeholder="اسم المشروع">
 <input id="safety" placeholder="اسم مسؤول السلامة">
 
 <select id="risk">
@@ -225,328 +99,244 @@ img{
 </select>
 
 <textarea id="violations" rows="5" placeholder="وصف المخالفات"></textarea>
-
 <input id="imageInput" type="file" accept="image/*">
 
 <button onclick="generateReport()">توليد التقرير</button>
-
 <button onclick="saveReport()">حفظ التقرير</button>
-
 <a href="/" class="btn">رجوع</a>
-
 </div>
 
 <div id="result" class="card" style="display:none;">
-
 <h1>التقرير النهائي</h1>
-
 <div id="reportText" class="report-box"></div>
-
 <button onclick="window.print()">طباعة / حفظ PDF</button>
-
 </div>
 
 </div>
 
 <script>
-
 let finalReport = "";
 let uploadedImage = "";
+let aiRisks = "";
+let aiActions = "";
 
-function generateReport(){
+async function generateAI(){
+  const text = document.getElementById("aiInput").value || document.getElementById("violations").value;
 
-const project = document.getElementById("project").value || "غير محدد";
+  if(!text){
+    alert("اكتب المخالفة أولاً");
+    return;
+  }
 
-const safety = document.getElementById("safety").value || "غير محدد";
+  const res = await fetch("/ai-generate", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({ violation:text })
+  });
 
-const risk = document.getElementById("risk").value;
+  const data = await res.json();
 
-const violations = document.getElementById("violations").value || "لم يتم إدخال مخالفات";
+  document.getElementById("violations").value = data.description;
+  document.getElementById("risk").value = data.risk;
+  aiRisks = data.risks;
+  aiActions = data.actions;
 
-const imageFile = document.getElementById("imageInput").files[0];
-
-if(imageFile){
-  uploadedImage = URL.createObjectURL(imageFile);
+  alert("تم تحسين التقرير بالذكاء الاصطناعي ✅");
 }
 
-finalReport =
-"<h2>تقرير سلامة مهنية</h2>" +
+function generateReport(){
+  const project = document.getElementById("project").value || "غير محدد";
+  const safety = document.getElementById("safety").value || "غير محدد";
+  const risk = document.getElementById("risk").value;
+  const violations = document.getElementById("violations").value || "لم يتم إدخال مخالفات";
+  const imageFile = document.getElementById("imageInput").files[0];
 
-"<p><strong>اسم المشروع:</strong> " + project + "</p>" +
+  if(imageFile){
+    uploadedImage = URL.createObjectURL(imageFile);
+  }
 
-"<p><strong>مسؤول السلامة:</strong> " + safety + "</p>" +
+  const risksText = aiRisks || "<ul><li>احتمالية وقوع إصابات للعاملين.</li><li>تعطل الأعمال أو تلف المعدات.</li><li>مخالفة اشتراطات السلامة المهنية.</li></ul>";
+  const actionsText = aiActions || "<ul><li>إيقاف العمل في منطقة الخطر عند الحاجة.</li><li>تأمين الموقع حسب اشتراطات السلامة المهنية.</li><li>توفير معدات الوقاية الشخصية للعاملين.</li><li>متابعة تنفيذ الإجراءات التصحيحية.</li></ul>";
 
-"<p><strong>مستوى الخطورة:</strong> " + risk + "</p>" +
+  finalReport =
+  "<h2>تقرير سلامة مهنية</h2>" +
+  "<p><strong>اسم المشروع:</strong> " + project + "</p>" +
+  "<p><strong>مسؤول السلامة:</strong> " + safety + "</p>" +
+  "<p><strong>مستوى الخطورة:</strong> " + risk + "</p>" +
+  "<hr>" +
+  "<h3>وصف المخالفة:</h3>" +
+  "<p>" + violations + "</p>" +
+  (uploadedImage ? "<h3>صورة المخالفة:</h3><img src='" + uploadedImage + "'>" : "") +
+  "<h3>المخاطر المحتملة:</h3>" +
+  risksText +
+  "<h3>الإجراءات التصحيحية:</h3>" +
+  actionsText +
+  "<hr>" +
+  "<p><strong>تطوير وإنشاء المنصة:</strong> سامي الأسمري</p>";
 
-"<hr>" +
-
-"<h3>وصف المخالفات:</h3>" +
-
-"<p>" + violations + "</p>" +
-
-(uploadedImage ?
-"<h3>صورة المخالفة:</h3><img src='" + uploadedImage + "'>"
-: "") +
-
-"<h3>المخاطر المحتملة:</h3>" +
-
-"<ul>" +
-"<li>احتمالية وقوع إصابات للعاملين.</li>" +
-"<li>تعطل الأعمال أو تلف المعدات.</li>" +
-"<li>مخالفة اشتراطات السلامة المهنية.</li>" +
-"</ul>" +
-
-"<h3>الإجراءات التصحيحية:</h3>" +
-
-"<ul>" +
-"<li>إيقاف العمل في منطقة الخطر عند الحاجة.</li>" +
-"<li>تأمين الموقع حسب اشتراطات السلامة المهنية.</li>" +
-"<li>توفير معدات الوقاية الشخصية للعاملين.</li>" +
-"<li>متابعة تنفيذ الإجراءات التصحيحية.</li>" +
-"</ul>" +
-
-"<hr>" +
-
-"<p><strong>تطوير وإنشاء المنصة:</strong> سامي الأسمري</p>";
-
-document.getElementById("reportText").innerHTML = finalReport;
-
-document.getElementById("result").style.display = "block";
+  document.getElementById("reportText").innerHTML = finalReport;
+  document.getElementById("result").style.display = "block";
 }
 
 function saveReport(){
+  generateReport();
 
-generateReport();
-
-fetch("/save-report", {
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-project:document.getElementById("project").value || "غير محدد",
-
-safety:document.getElementById("safety").value || "غير محدد",
-
-risk:document.getElementById("risk").value,
-
-violations:document.getElementById("violations").value || "لم يتم إدخال مخالفات",
-
-report:finalReport
-
-})
-
-})
-
-.then(res => res.json())
-
-.then(data => alert("تم حفظ التقرير بنجاح ✅"));
-
+  fetch("/save-report", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      project:document.getElementById("project").value || "غير محدد",
+      safety:document.getElementById("safety").value || "غير محدد",
+      risk:document.getElementById("risk").value,
+      violations:document.getElementById("violations").value || "لم يتم إدخال مخالفات",
+      report:finalReport
+    })
+  })
+  .then(res => res.json())
+  .then(data => alert("تم حفظ التقرير بنجاح ✅"));
 }
-
 </script>
-
 </body>
 </html>
-  `);
+`);
+});
+
+app.post("/ai-generate", async (req, res) => {
+  const violation = req.body.violation || "";
+
+  if (!process.env.OPENAI_API_KEY) {
+    return res.json({
+      description: "تم رصد مخالفة تتعلق بـ: " + violation + ". ويجب التعامل معها وفق اشتراطات الصحة والسلامة المهنية.",
+      risk: "متوسط",
+      risks: "<ul><li>احتمالية تعرض العاملين للإصابة.</li><li>زيادة احتمالية وقوع حادث بالموقع.</li><li>مخالفة متطلبات السلامة المهنية.</li></ul>",
+      actions: "<ul><li>إزالة مصدر الخطر فوراً.</li><li>تأمين منطقة العمل.</li><li>توفير وسائل الوقاية والتحذير المناسبة.</li><li>متابعة تنفيذ الإجراء التصحيحي.</li></ul>"
+    });
+  }
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + process.env.OPENAI_API_KEY
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "أنت خبير صحة وسلامة مهنية HSE. أجب بصيغة JSON فقط بدون شرح."
+          },
+          {
+            role: "user",
+            content:
+              "حوّل هذه المخالفة إلى تقرير سلامة احترافي. أعد JSON بهذا الشكل فقط: {\"description\":\"\",\"risk\":\"منخفض أو متوسط أو عالي\",\"risks\":\"<ul><li></li></ul>\",\"actions\":\"<ul><li></li></ul>\"}. المخالفة: " + violation
+          }
+        ],
+        temperature: 0.3
+      })
+    });
+
+    const data = await response.json();
+    const content = data.choices[0].message.content;
+    const parsed = JSON.parse(content);
+
+    res.json(parsed);
+  } catch (error) {
+    res.json({
+      description: "تم رصد مخالفة تتعلق بـ: " + violation + ". يلزم اتخاذ إجراء تصحيحي فوري حسب متطلبات السلامة.",
+      risk: "متوسط",
+      risks: "<ul><li>احتمالية وقوع إصابة.</li><li>تعرض العاملين للخطر.</li><li>مخالفة إجراءات السلامة.</li></ul>",
+      actions: "<ul><li>إيقاف العمل عند الحاجة.</li><li>تأمين الموقع.</li><li>توفير معدات الوقاية الشخصية.</li><li>متابعة الإغلاق.</li></ul>"
+    });
+  }
 });
 
 app.post("/save-report", (req, res) => {
+  const report = {
+    id: Date.now(),
+    date: new Date().toLocaleString("ar-SA"),
+    ...req.body
+  };
 
-const report = {
-id: Date.now(),
-date: new Date().toLocaleString("ar-SA"),
-...req.body
-};
-
-reports.push(report);
-
-res.json({ success: true });
-
+  reports.push(report);
+  res.json({ success: true });
 });
 
 app.get("/saved", (req, res) => {
+  let html = reports.map(r => 
+    "<div class='card'>" +
+    "<h2>" + r.project + "</h2>" +
+    "<p><strong>التاريخ:</strong> " + r.date + "</p>" +
+    "<p><strong>مسؤول السلامة:</strong> " + r.safety + "</p>" +
+    "<p><strong>الخطورة:</strong> " + r.risk + "</p>" +
+    "<a class='btn' href='/saved/" + r.id + "'>عرض التقرير</a>" +
+    "</div>"
+  ).join("");
 
-let html = reports.map(r => `
-<div class="card">
+  if (!html) {
+    html = "<div class='card'><h2>لا توجد تقارير محفوظة حتى الآن</h2></div>";
+  }
 
-<h2>${r.project}</h2>
-
-<p><strong>التاريخ:</strong> ${r.date}</p>
-
-<p><strong>مسؤول السلامة:</strong> ${r.safety}</p>
-
-<p><strong>الخطورة:</strong> ${r.risk}</p>
-
-<a class="btn" href="/saved/${r.id}">عرض التقرير</a>
-
-</div>
-`).join("");
-
-if (!html){
-html = "<div class='card'><h2>لا توجد تقارير محفوظة حتى الآن</h2></div>";
-}
-
-res.send(`
+  res.send(`
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>التقارير المحفوظة</title>
-
 <style>
-
-body{
-background:#f3f4f6;
-padding:20px;
-font-family:Arial;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:18px;
-margin-bottom:20px;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-h1,h2{
-color:#4c1d95;
-}
-
-.btn{
-display:inline-block;
-background:#4c1d95;
-color:white;
-padding:10px 18px;
-border-radius:10px;
-text-decoration:none;
-margin-top:15px;
-}
-
+body{background:#f3f4f6;padding:20px;font-family:Arial}
+.container{max-width:900px;margin:auto}
+.card{background:white;padding:25px;border-radius:18px;margin-bottom:20px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+h1,h2{color:#4c1d95}
+.btn{display:inline-block;background:#4c1d95;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;margin-top:15px}
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
 <h1>التقارير المحفوظة</h1>
-
 <a href="/" class="btn">الرئيسية</a>
-
 <br><br>
-
 ${html}
-
 </div>
-
 </body>
 </html>
 `);
 });
 
 app.get("/saved/:id", (req, res) => {
+  const report = reports.find(r => r.id == req.params.id);
 
-const report = reports.find(r => r.id == req.params.id);
+  if (!report) {
+    return res.send("التقرير غير موجود");
+  }
 
-if (!report){
-return res.send("التقرير غير موجود");
-}
-
-res.send(`
+  res.send(`
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>عرض التقرير</title>
-
 <style>
-
-body{
-background:#f3f4f6;
-padding:20px;
-font-family:Arial;
-}
-
-.card{
-background:white;
-padding:30px;
-border-radius:18px;
-max-width:900px;
-margin:auto;
-line-height:2;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-button,a{
-background:#4c1d95;
-color:white;
-padding:10px 18px;
-border-radius:10px;
-text-decoration:none;
-border:none;
-}
-
-img{
-width:100%;
-border-radius:15px;
-margin-top:20px;
-}
-
-@media print{
-
-button,a{
-display:none;
-}
-
-body{
-background:white;
-}
-
-.card{
-box-shadow:none;
-}
-
-}
-
+body{background:#f3f4f6;padding:20px;font-family:Arial}
+.card{background:white;padding:30px;border-radius:18px;max-width:900px;margin:auto;line-height:2;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+button,a{background:#4c1d95;color:white;padding:10px 18px;border-radius:10px;text-decoration:none;border:none}
+img{width:100%;border-radius:15px;margin-top:20px}
+@media print{button,a{display:none}body{background:white}.card{box-shadow:none}}
 </style>
 </head>
-
 <body>
-
 <div class="card">
-
 ${report.report}
-
 <br><br>
-
 <button onclick="window.print()">طباعة / PDF</button>
-
 <a href="/saved">رجوع</a>
-
 </div>
-
 </body>
 </html>
 `);
 });
 
 app.listen(PORT, () => {
-console.log("HSE AI Running on port " + PORT);
+  console.log("HSE AI Running on port " + PORT);
 });
