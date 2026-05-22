@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HSE AI Reports | تقارير السلامة بالذكاء الاصطناعي</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="badge">منصة تقارير الصحة والسلامة المهنية</p>
+      <h1>حوّل ملاحظات السلامة إلى تقرير رسمي خلال ثواني</h1>
+      <p class="subtitle">ارفع صورة المخالفة أو اكتب الوصف، والذكاء الاصطناعي يولّد تقرير HSE منسق وجاهز للنسخ والطباعة.</p>
+      <a href="#generator" class="cta">ابدأ الآن</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="features">
+      <div><b>تقارير رسمية</b><span>صياغة مناسبة للمشاريع والمقاولين.</span></div>
+      <div><b>تحليل صورة</b><span>إضافة صورة المخالفة لتحسين وصف الحالة.</span></div>
+      <div><b>نسخ وطباعة</b><span>انسخ التقرير أو اطبعه PDF من المتصفح.</span></div>
+    </section>
+
+    <section id="generator" class="card">
+      <h2>إنشاء تقرير سلامة</h2>
+      <form id="reportForm">
+        <label>اسم المشروع<input name="projectName" placeholder="مثال: مشروع مخطط سكني" /></label>
+        <label>الموقع<input name="location" placeholder="مثال: جدة - منطقة العمل A" /></label>
+        <label>التاريخ<input name="date" type="date" /></label>
+        <label>نوع الملاحظة
+          <select name="violationType">
+            <option>عدم استخدام معدات الوقاية الشخصية PPE</option>
+            <option>عمل على ارتفاع</option>
+            <option>مخاطر كهربائية</option>
+            <option>نظافة وترتيب الموقع</option>
+            <option>حفر وردم</option>
+            <option>معدات وآليات</option>
+            <option>أخرى</option>
+          </select>
+        </label>
+        <label>مستوى الخطورة
+          <select name="riskLevel">
+            <option>منخفض</option>
+            <option>متوسط</option>
+            <option>عالي</option>
+            <option>حرج</option>
+          </select>
+        </label>
+        <label class="full">وصف الحالة<textarea name="description" rows="4" placeholder="اكتب وصف المخالفة أو الملاحظة..."></textarea></label>
+        <label class="full">الإجراء المطلوب<textarea name="action" rows="3" placeholder="مثال: إيقاف العمل مؤقتًا وتوفير معدات الوقاية..."></textarea></label>
+        <label class="full">صورة الملاحظة / المخالفة<input name="photo" type="file" accept="image/*" /></label>
+        <button type="submit">توليد التقرير</button>
+      </form>
+    </section>
+
+    <section class="card output-card">
+      <div class="output-head">
+        <h2>التقرير الناتج</h2>
+        <div>
+          <button id="copyBtn" type="button">نسخ</button>
+          <button id="printBtn" type="button">طباعة PDF</button>
+        </div>
+      </div>
+      <pre id="result">سيظهر التقرير هنا...</pre>
+    </section>
+  </main>
+
+  <footer>© HSE AI Reports - نسخة أولية MVP</footer>
+  <script src="app.js"></script>
+</body>
+</html>
