@@ -1,0 +1,1 @@
+{"name":"safety-ai-pro","version":"2.0.0","description":"AI HSE Reports by Sami Alasmari","main":"server.js","scripts":{"start":"node server.js","dev":"node server.js"},"dependencies":{"@google/generative-ai":"latest","cors":"latest","dotenv":"latest","express":"latest","multer":"latest","openai":"latest"},"engines":{"node":">=18"}}

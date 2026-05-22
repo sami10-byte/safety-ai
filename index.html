@@ -1,0 +1,13 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Safety AI | تقارير السلامة</title><link rel="stylesheet" href="style.css"/></head><body>
+<header><div><h1>Safety AI</h1><p>منشئ موقع الذكاء الاصطناعي: سامي الاسمري</p></div><nav><button onclick="showTab('new')">تقرير جديد</button><button onclick="showTab('saved')">التقارير المحفوظة</button></nav></header>
+<main>
+<section id="new" class="card">
+<h2>إنشاء تقرير صحة وسلامة مهنية</h2><p class="muted">أدخل بيانات المخالفة وسيتم إنشاء تقرير رسمي منسق وحفظه تلقائيًا.</p>
+<form id="reportForm">
+<div class="grid"><label>اسم المشروع<input name="projectName" required placeholder="مثال: مخطط درة الجنوب"></label><label>موقع المخالفة<input name="location" placeholder="مثال: طريق 2"></label><label>مسؤول السلامة<input name="safetyOfficer" placeholder="مثال: سامي الاسمري"></label><label>مدير المشروع<input name="projectManager" placeholder="مثال: محمد حاتم"></label><label>مستوى الخطورة<select name="riskLevel"><option>منخفض</option><option selected>متوسط</option><option>عالٍ</option><option>حرج</option></select></label><label>صورة المخالفة<input type="file" name="photo" accept="image/*"></label></div>
+<label>وصف المخالفة<textarea name="violation" required placeholder="اكتب المخالفة باختصار، وسيتم تحسينها تلقائيًا"></textarea></label><label>الملاحظات<textarea name="notes" placeholder="أي ملاحظات إضافية"></textarea></label>
+<button class="primary" type="submit">توليد وحفظ التقرير</button>
+</form></section>
+<section id="result" class="report hidden"></section>
+<section id="saved" class="card hidden"><h2>التقارير المحفوظة</h2><div id="savedList" class="list"></div></section>
+</main><script src="app.js"></script></body></html>
