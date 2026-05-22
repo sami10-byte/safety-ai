@@ -246,7 +246,7 @@ app.get("/reports", (req, res) => {
     const safety = inputs[1].value || "غير محدد";
     const violations = textarea.value || "لم يتم إدخال مخالفات";
 
-    const report = `
+    const report = 
       <h2>تقرير سلامة مهنية</h2>
       <p><strong>اسم المشروع:</strong> ${project}</p>
       <p><strong>مسؤول السلامة:</strong> ${safety}</p>
@@ -260,7 +260,7 @@ app.get("/reports", (req, res) => {
         <li>توفير معدات الوقاية الشخصية للعاملين.</li>
         <li>متابعة تنفيذ الإجراءات التصحيحية.</li>
       </ul>
-    `;
+  
 
     document.getElementById("reportText").innerHTML = report;
     document.getElementById("result").style.display = "block";
