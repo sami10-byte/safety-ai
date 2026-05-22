@@ -114,7 +114,7 @@ app.get("*", (req, res) => {
         <div class="card">
           <h2>التقارير</h2>
           <p>إنشاء وإدارة تقارير السلامة المهنية.</p>
-          <a href="#" class="btn">فتح</a>
+          <a href="/reports" class="btn">فتح</a>
         </div>
 
         <div class="card">
