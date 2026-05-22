@@ -1,0 +1,24 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+*{box-sizing:border-box} body{margin:0;background:#f5f7fb;font-family:Tajawal,Arial,sans-serif;color:#111827}
+header{background:linear-gradient(135deg,#25105f,#5b21b6);color:#fff;padding:28px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+h1{margin:0;font-size:28px} header p{margin:6px 0 0;color:#ddd6fe}
+button{background:#5b21b6;color:white;border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer}
+main{max-width:1100px;margin:auto;padding:18px;display:grid;grid-template-columns:1fr;gap:18px}
+.card{background:white;border:1px solid #e5e7eb;border-radius:18px;padding:18px;box-shadow:0 8px 28px #11182710}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+label{display:flex;flex-direction:column;font-weight:700;color:#312e81}
+input,textarea,select{margin-top:8px;border:1px solid #ddd6fe;border-radius:12px;padding:12px;font-family:inherit;font-size:15px;background:#fafafa}
+textarea{min-height:100px;resize:vertical}
+form button{grid-column:1/-1}
+.report{border:1px solid #c4b5fd;border-radius:14px;background:#fff;overflow:hidden}
+.report-head{display:flex;justify-content:space-between;align-items:center;background:#2e1065;color:#fff;padding:14px 16px}
+.report-head h3{margin:0}.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;padding:16px}
+.info p{background:#f8f7ff;border:1px solid #ddd6fe;border-radius:12px;padding:12px;margin:0}
+table{width:100%;border-collapse:collapse}th{background:#3b0764;color:#fff}th,td{border:1px solid #ddd6fe;padding:14px;text-align:center}
+h4{padding:0 16px;margin-bottom:6px}ul{padding:0 34px 18px}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px}
+.signatures div{border:1px solid #ddd6fe;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+#reportsList{display:grid;gap:10px}.saved{border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fafafa}
+footer{text-align:center;padding:24px;color:#6b7280}
+@media print{header,form,#reportsList,footer,.card:first-child{display:none}.card{box-shadow:none;border:0}.report{border:1px solid #999}body{background:white}main{padding:0}}
