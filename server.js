@@ -95,7 +95,7 @@ app.get("*", (req, res) => {
 
     <div class="navbar">
       <h1>HSE AI</h1>
-      <span>منصة الصحة والسلامة المهنية</span>
+      <span>منصة الصحة والسلامة المهنية | تطوير وإنشاء: سامي الأسمري</span>
     </div>
 
     <div class="container">
