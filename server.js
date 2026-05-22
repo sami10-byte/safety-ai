@@ -4,7 +4,11 @@ const fs = require('fs');
 const multer = require('multer');
 const Database = require('better-sqlite3');
 const OpenAI = require('openai');
+app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DATA_DIR = path.join(__dirname, 'data');
