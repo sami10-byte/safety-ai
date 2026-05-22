@@ -12,17 +12,20 @@ app.get("/", (req, res) => {
   res.send(`
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>HSE AI</title>
 
 <style>
+
 *{
   box-sizing:border-box;
-  font-family:Arial;
   margin:0;
   padding:0;
+  font-family:Arial;
 }
 
 body{
@@ -70,6 +73,7 @@ h1,h2{
   text-decoration:none;
   margin-top:15px;
 }
+
 </style>
 </head>
 
@@ -118,15 +122,16 @@ app.get("/reports", (req, res) => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>إنشاء تقرير</title>
 
 <style>
 
 *{
   box-sizing:border-box;
-  font-family:Arial;
   margin:0;
   padding:0;
+  font-family:Arial;
 }
 
 body{
@@ -170,11 +175,18 @@ button,.btn{
   font-size:16px;
   text-decoration:none;
   display:inline-block;
+  cursor:pointer;
 }
 
 .report-box{
   line-height:2;
   font-size:17px;
+}
+
+img{
+  width:100%;
+  border-radius:15px;
+  margin-top:15px;
 }
 
 @media print{
@@ -214,6 +226,8 @@ button,.btn{
 
 <textarea id="violations" rows="5" placeholder="وصف المخالفات"></textarea>
 
+<input id="imageInput" type="file" accept="image/*">
+
 <button onclick="generateReport()">توليد التقرير</button>
 
 <button onclick="saveReport()">حفظ التقرير</button>
@@ -223,11 +237,13 @@ button,.btn{
 </div>
 
 <div id="result" class="card" style="display:none;">
+
 <h1>التقرير النهائي</h1>
 
 <div id="reportText" class="report-box"></div>
 
 <button onclick="window.print()">طباعة / حفظ PDF</button>
+
 </div>
 
 </div>
@@ -235,6 +251,7 @@ button,.btn{
 <script>
 
 let finalReport = "";
+let uploadedImage = "";
 
 function generateReport(){
 
@@ -246,28 +263,50 @@ const risk = document.getElementById("risk").value;
 
 const violations = document.getElementById("violations").value || "لم يتم إدخال مخالفات";
 
+const imageFile = document.getElementById("imageInput").files[0];
+
+if(imageFile){
+  uploadedImage = URL.createObjectURL(imageFile);
+}
+
 finalReport =
 "<h2>تقرير سلامة مهنية</h2>" +
+
 "<p><strong>اسم المشروع:</strong> " + project + "</p>" +
+
 "<p><strong>مسؤول السلامة:</strong> " + safety + "</p>" +
+
 "<p><strong>مستوى الخطورة:</strong> " + risk + "</p>" +
+
 "<hr>" +
+
 "<h3>وصف المخالفات:</h3>" +
+
 "<p>" + violations + "</p>" +
+
+(uploadedImage ?
+"<h3>صورة المخالفة:</h3><img src='" + uploadedImage + "'>"
+: "") +
+
 "<h3>المخاطر المحتملة:</h3>" +
+
 "<ul>" +
 "<li>احتمالية وقوع إصابات للعاملين.</li>" +
 "<li>تعطل الأعمال أو تلف المعدات.</li>" +
 "<li>مخالفة اشتراطات السلامة المهنية.</li>" +
 "</ul>" +
+
 "<h3>الإجراءات التصحيحية:</h3>" +
+
 "<ul>" +
 "<li>إيقاف العمل في منطقة الخطر عند الحاجة.</li>" +
 "<li>تأمين الموقع حسب اشتراطات السلامة المهنية.</li>" +
 "<li>توفير معدات الوقاية الشخصية للعاملين.</li>" +
 "<li>متابعة تنفيذ الإجراءات التصحيحية.</li>" +
 "</ul>" +
+
 "<hr>" +
+
 "<p><strong>تطوير وإنشاء المنصة:</strong> سامي الأسمري</p>";
 
 document.getElementById("reportText").innerHTML = finalReport;
@@ -334,6 +373,7 @@ app.get("/saved", (req, res) => {
 
 let html = reports.map(r => `
 <div class="card">
+
 <h2>${r.project}</h2>
 
 <p><strong>التاريخ:</strong> ${r.date}</p>
@@ -343,6 +383,7 @@ let html = reports.map(r => `
 <p><strong>الخطورة:</strong> ${r.risk}</p>
 
 <a class="btn" href="/saved/${r.id}">عرض التقرير</a>
+
 </div>
 `).join("");
 
@@ -355,7 +396,9 @@ res.send(`
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
+
 <title>التقارير المحفوظة</title>
 
 <style>
@@ -428,7 +471,9 @@ res.send(`
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
+
 <title>عرض التقرير</title>
 
 <style>
@@ -458,7 +503,14 @@ text-decoration:none;
 border:none;
 }
 
+img{
+width:100%;
+border-radius:15px;
+margin-top:20px;
+}
+
 @media print{
+
 button,a{
 display:none;
 }
@@ -470,6 +522,7 @@ background:white;
 .card{
 box-shadow:none;
 }
+
 }
 
 </style>
