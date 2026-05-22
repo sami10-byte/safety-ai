@@ -143,7 +143,98 @@ app.get("*", (req, res) => {
   </html>
   `);
 });
+app.get("/reports", (req, res) => {
+  res.send(`
+  <!DOCTYPE html>
+  <html lang="ar" dir="rtl">
 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء تقرير</title>
+
+    <style>
+
+      *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial;
+      }
+
+      body{
+        background:#f5f5f5;
+        padding:20px;
+      }
+
+      .container{
+        max-width:900px;
+        margin:auto;
+      }
+
+      .card{
+        background:white;
+        padding:25px;
+        border-radius:20px;
+        margin-bottom:20px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.08);
+      }
+
+      h1{
+        color:#4c1d95;
+        margin-bottom:20px;
+      }
+
+      input, textarea{
+        width:100%;
+        padding:15px;
+        margin-top:10px;
+        margin-bottom:20px;
+        border-radius:12px;
+        border:1px solid #ddd;
+        font-size:16px;
+      }
+
+      button{
+        background:#4c1d95;
+        color:white;
+        border:none;
+        padding:15px 25px;
+        border-radius:12px;
+        font-size:18px;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="card">
+
+        <h1>إنشاء تقرير سلامة</h1>
+
+        <input type="text" placeholder="اسم المشروع">
+
+        <input type="text" placeholder="اسم مسؤول السلامة">
+
+        <textarea rows="5" placeholder="وصف المخالفات"></textarea>
+
+        <input type="file">
+
+        <button>توليد التقرير</button>
+
+      </div>
+
+    </div>
+
+  </body>
+
+  </html>
+  `);
+});
 app.listen(PORT, () => {
   console.log("HSE AI Running on port " + PORT);
 });
