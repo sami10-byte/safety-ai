@@ -1,1 +1,38 @@
+<div id="result" class="card" style="display:none;">
+  <h1>التقرير النهائي</h1>
+  <div id="reportText"></div>
+  <button onclick="window.print()">طباعة / حفظ PDF</button>
+</div>
+
+<script>
+  const button = document.querySelector("button");
+
+  button.addEventListener("click", () => {
+    const inputs = document.querySelectorAll("input");
+    const textarea = document.querySelector("textarea");
+
+    const project = inputs[0].value || "غير محدد";
+    const safety = inputs[1].value || "غير محدد";
+    const violations = textarea.value || "لم يتم إدخال مخالفات";
+
+    const report = `
+      <h2>تقرير سلامة مهنية</h2>
+      <p><strong>اسم المشروع:</strong> ${project}</p>
+      <p><strong>مسؤول السلامة:</strong> ${safety}</p>
+      <hr>
+      <h3>وصف المخالفات:</h3>
+      <p>${violations}</p>
+      <h3>التوصيات:</h3>
+      <ul>
+        <li>إيقاف العمل في منطقة الخطر عند الحاجة.</li>
+        <li>تأمين الموقع حسب اشتراطات السلامة المهنية.</li>
+        <li>توفير معدات الوقاية الشخصية للعاملين.</li>
+        <li>متابعة تنفيذ الإجراءات التصحيحية.</li>
+      </ul>
+    `;
+
+    document.getElementById("reportText").innerHTML = report;
+    document.getElementById("result").style.display = "block";
+  });
+</script>
 </body>
