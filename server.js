@@ -16,49 +16,43 @@ app.get("/", (req, res) => {
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#eef2f1}
-.hero{min-height:100vh;background:linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.9)),url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1400');background-size:cover;background-position:center;padding:40px}
-.head{text-align:center;color:#064e3b;margin-bottom:40px}
-.head h1{font-size:52px;margin:15px 0}
-.head p{font-size:22px;line-height:1.8}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;max-width:1000px;margin:auto}
-.card{background:white;border-radius:28px;padding:35px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.12)}
-.icon{font-size:80px}
-.card h2{color:#064e3b;font-size:34px;margin:15px}
-.card p{font-size:20px;line-height:1.8}
+.hero{min-height:100vh;background:#f4f7f6;padding:40px;display:flex;align-items:center;justify-content:center}
+.wrap{max-width:1100px;width:100%;text-align:center}
+.logo{font-size:70px}
+h1{font-size:48px;color:#064e3b;margin:15px 0}
+p{font-size:21px;line-height:1.8}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;margin-top:40px}
+.card{background:white;border-radius:28px;padding:35px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.card h2{color:#064e3b;font-size:32px;margin:15px}
 .btn{display:inline-block;background:#065f46;color:white;text-decoration:none;padding:16px 35px;border-radius:14px;font-size:22px;margin-top:25px}
-.footer{background:#064e3b;color:white;padding:20px;margin-top:50px;border-radius:20px;display:flex;justify-content:space-around;gap:15px;flex-wrap:wrap;font-size:18px}
+.footer{background:#064e3b;color:white;padding:18px;border-radius:18px;margin-top:35px}
 </style>
 </head>
 <body>
 <section class="hero">
-<div class="head">
-<div style="font-size:70px">🛡️</div>
+<div class="wrap">
+<div class="logo">🛡️</div>
 <h1>صحة وسلامة مهنية</h1>
 <p>بيئة آمنة .. عمل مستدام</p>
 <p>منصة ذكية لإدارة تقارير الصحة والسلامة المهنية</p>
-</div>
 
 <div class="cards">
 <div class="card">
-<div class="icon">📋</div>
-<h2>تقرير صحة وسلامة مهنية</h2>
-<p>إنشاء تقرير احترافي مع صور المخالفات والتوصيات والتوقيعات.</p>
+<div style="font-size:70px">📋</div>
+<h2>تقرير مخالفات صحة وسلامة مهنية</h2>
+<p>إدخال بيانات المخالفة وإصدار تقرير احترافي.</p>
 <a class="btn" href="/reports">دخول إلى التقارير</a>
 </div>
 
 <div class="card">
-<div class="icon">❓</div>
+<div style="font-size:70px">❓</div>
 <h2>اسألني</h2>
 <p>عن أي شيء يخص الصحة والسلامة المهنية.</p>
 <a class="btn" href="/ask">اسأل الآن</a>
 </div>
 </div>
 
-<div class="footer">
-<span>🛡️ السلامة مسؤولية الجميع</span>
-<span>👷 نحن نهتم</span>
-<span>✅ نلتزم بالمعايير</span>
-<span>❤️ صحة اليوم .. أمان الغد</span>
+<div class="footer">تطوير وإنشاء المنصة: سامي الأسمري</div>
 </div>
 </section>
 </body>
@@ -76,8 +70,8 @@ app.get("/ask", (req, res) => {
 <title>اسألني</title>
 <style>
 body{font-family:Arial;background:#f3f4f6;padding:20px}
-.card{background:white;max-width:800px;margin:auto;padding:30px;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.1)}
-h1{color:#065f46}
+.card{background:white;max-width:850px;margin:auto;padding:30px;border-radius:20px}
+h1{color:#064e3b}
 textarea{width:100%;padding:15px;border-radius:12px;border:1px solid #ddd;font-size:18px}
 button,a{background:#065f46;color:white;padding:14px 22px;border-radius:12px;border:none;text-decoration:none;font-size:18px}
 .answer{background:#ecfdf5;margin-top:20px;padding:20px;border-radius:15px;line-height:2;display:none}
@@ -91,7 +85,6 @@ button,a{background:#065f46;color:white;padding:14px 22px;border-radius:12px;bor
 <a href="/">رجوع</a>
 <div id="answer" class="answer"></div>
 </div>
-
 <script>
 async function ask(){
 var q=document.getElementById("q").value;
@@ -107,13 +100,12 @@ document.getElementById("answer").innerHTML=data.answer;
 `);
 });
 
-app.post("/ask-ai", async (req, res) => {
+app.post("/ask-ai", (req, res) => {
   const q = req.body.question || "";
   res.json({
     answer:
-      "إجابة مبدئية: بخصوص سؤالك: <b>" +
-      q +
-      "</b><br>يجب تقييم الخطر، تأمين منطقة العمل، استخدام معدات الوقاية الشخصية، وتطبيق الإجراءات التصحيحية حسب اشتراطات الصحة والسلامة المهنية."
+      "بخصوص سؤالك: <b>" + q + "</b><br><br>" +
+      "يجب تقييم الخطر، تأمين منطقة العمل، استخدام معدات الوقاية الشخصية، وتطبيق الإجراءات التصحيحية حسب اشتراطات الصحة والسلامة المهنية."
   });
 });
 
@@ -124,65 +116,69 @@ app.get("/reports", (req, res) => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تقرير سلامة</title>
+<title>تقرير مخالفات صحة وسلامة مهنية</title>
 <style>
 *{box-sizing:border-box;font-family:Arial;margin:0;padding:0}
-body{background:#f3f4f6;padding:20px}
-.form{background:white;max-width:1000px;margin:auto;padding:25px;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.1)}
-h1{color:#35106f;margin-bottom:20px}
+body{background:#eef2f1;padding:20px}
+.form{background:white;max-width:1050px;margin:auto;padding:25px;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.1)}
+h1{color:#064e3b;margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
 input,textarea{width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;margin:8px 0 15px;font-size:16px}
-label{font-weight:bold;color:#35106f}
-button,a{background:#35106f;color:white;padding:13px 22px;border:none;border-radius:12px;text-decoration:none;font-size:17px;margin:5px;display:inline-block}
-.report{max-width:1050px;margin:30px auto;background:white;padding:20px;border-radius:12px;display:none}
-.top-box{border:1px solid #d7c9ef;border-radius:8px;margin-bottom:15px;overflow:hidden}
-.section-head{display:flex;align-items:center;justify-content:space-between;background:#f9f7ff;color:#35106f;font-weight:bold;padding:10px;border-bottom:1px solid #d7c9ef}
-.section-icon{background:#35106f;color:white;padding:12px;border-radius:6px;font-size:20px}
-.project-name{font-size:26px;padding:18px;text-align:center}
-table{width:100%;border-collapse:collapse}
-th{background:#35106f;color:white;padding:12px;border:1px solid #d7c9ef}
-td{border:1px solid #d7c9ef;padding:12px;text-align:center;vertical-align:middle}
-.pic{width:260px;height:130px;object-fit:cover}
-.lines{color:#aaa;line-height:2.2;text-align:right}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-.box{border:1px solid #d7c9ef;border-radius:8px;overflow:hidden}
-.box h3{background:#f9f7ff;color:#35106f;padding:10px}
-.box-content{padding:14px;min-height:110px;line-height:2}
-.signs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-.sign{border:1px solid #d7c9ef;border-radius:8px;padding:12px}
-.sign h3{color:#35106f;text-align:center;margin-bottom:12px}
-.line{height:34px;border-bottom:1px solid #aaa;margin-bottom:8px}
-.footer{text-align:center;margin-top:20px;color:#35106f;border-top:2px solid #35106f;padding-top:10px}
-@media(max-width:700px){.two,.signs{grid-template-columns:1fr}.pic{width:100%}}
-@media print{.form,button,a{display:none}.report{display:block;margin:0;border-radius:0}body{background:white;padding:0}}
+label{font-weight:bold;color:#064e3b}
+button,a{background:#064e3b;color:white;padding:13px 22px;border:none;border-radius:12px;text-decoration:none;font-size:17px;margin:5px;display:inline-block}
+.report{max-width:1050px;margin:30px auto;background:white;border-radius:12px;display:none;overflow:hidden;border:1px solid #cfd8d5}
+.report-header{padding:25px 35px;border-bottom:2px solid #777;display:flex;align-items:center;justify-content:space-between}
+.report-header h1{font-size:34px;text-align:center;color:#064e3b}
+.logo-box{font-size:55px;color:#064e3b}
+.info-row{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:2px solid #777}
+.info-item{padding:18px;text-align:center;border-left:1px solid #aaa;font-size:18px}
+.info-item b{color:#064e3b;display:block;margin-bottom:8px}
+.section{padding:24px 40px}
+.section-title{background:#064e3b;color:white;padding:12px 22px;border-radius:10px 10px 0 0;font-size:22px;font-weight:bold;display:inline-block;min-width:300px;text-align:center}
+.box{border:1px solid #888;border-radius:10px;padding:25px;margin-top:-1px;line-height:2;font-size:21px;min-height:120px}
+.photo-box{border:1px solid #888;border-radius:10px;padding:25px;margin-top:-1px;text-align:center}
+.photo-box img{width:90%;max-height:330px;object-fit:cover;border-radius:8px}
+ul{padding-right:25px;line-height:2;font-size:20px}
+.footer{background:#064e3b;color:white;padding:20px 35px;display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;font-size:18px;margin-top:25px}
+@media(max-width:750px){
+.info-row,.footer{grid-template-columns:1fr}
+.report-header{flex-direction:column;gap:10px}
+.section{padding:18px}
+.section-title{min-width:100%}
+}
+@media print{
+.form,button,a{display:none!important}
+body{background:white;padding:0}
+.report{display:block;margin:0;max-width:none;border:none;border-radius:0}
+}
 </style>
 </head>
 <body>
 
 <div class="form">
-<h1>إدخال بيانات التقرير</h1>
+<h1>إدخال بيانات تقرير المخالفة</h1>
 
 <div class="grid">
-<div><label>اسم المشروع</label><input id="project" placeholder="مخطط درة الجنوب"></div>
-<div><label>مسؤول السلامة</label><input id="safety" placeholder="سامي الأسمري"></div>
-<div><label>مدير المشروع</label><input id="manager" placeholder="اسم مدير المشروع"></div>
+<div><label>اسم المشروع</label><input id="project" placeholder="مشروع إنشاء مبنى إداري"></div>
+<div><label>مسؤول السلامة</label><input id="safety" placeholder="أحمد محمد الشريف"></div>
+<div><label>مدير المشروع</label><input id="manager" placeholder="خالد عبدالعزيز السالم"></div>
 </div>
 
-<div class="grid">
-<div><label>المخالفة 1</label><input id="v1" placeholder="عدم ارتداء معدات الوقاية الشخصية"><input id="img1" type="file" accept="image/*"></div>
-<div><label>المخالفة 2</label><input id="v2" placeholder="تمديدات كهربائية مكشوفة"><input id="img2" type="file" accept="image/*"></div>
-<div><label>المخالفة 3</label><input id="v3" placeholder="عدم توفر طفاية حريق صالحة"><input id="img3" type="file" accept="image/*"></div>
-</div>
+<label>ما هي المخالفة؟</label>
+<textarea id="violation" rows="4" placeholder="عدم ارتداء معدات الوقاية الشخصية المناسبة..."></textarea>
+
+<label>صورة المخالفة</label>
+<input id="img" type="file" accept="image/*">
 
 <label>ملاحظات عامة</label>
-<textarea id="notes" rows="3" placeholder="اكتب الملاحظات العامة"></textarea>
+<textarea id="notes" rows="4">تم رصد المخالفة في الموقع.
+تم توجيه العامل شفهياً بضرورة الالتزام باشتراطات السلامة.
+تكرار هذه المخالفة قد يؤدي إلى إصابات أو غرامات نظامية.</textarea>
 
-<label>التوصيات العامة</label>
-<textarea id="rec" rows="5">الالتزام بجميع اشتراطات الصحة والسلامة المهنية.
-توفير معدات الوقاية الشخصية لجميع العاملين.
-إجراء تفتيش دوري على الموقع.
-تدريب العاملين على إجراءات السلامة.
-التأكد من تطبيق الإجراءات التصحيحية للمخالفات.</textarea>
+<label>توصيات عامة</label>
+<textarea id="rec" rows="4">الالتزام بارتداء معدات الوقاية الشخصية المناسبة في جميع الأوقات.
+تكثيف برامج التوعية والتثقيف حول أهمية السلامة في موقع العمل.
+تطبيق نظام إنذار واضح للمخالفات واتخاذ الإجراءات التصحيحية اللازمة.</textarea>
 
 <button onclick="generate()">توليد التقرير</button>
 <button onclick="window.print()">طباعة / PDF</button>
@@ -191,71 +187,50 @@ td{border:1px solid #d7c9ef;padding:12px;text-align:center;vertical-align:middle
 
 <div id="report" class="report">
 
-<div class="top-box">
-<div class="section-head">
-<span>1. اسم المشروع</span>
-<span class="section-icon">📋</span>
-</div>
-<div class="project-name" id="rProject"></div>
+<div class="report-header">
+<div class="logo-box">🪖🛡️</div>
+<h1>تقرير مخالفات صحة وسلامة مهنية</h1>
+<div></div>
 </div>
 
-<div class="top-box">
-<div class="section-head">
-<span>2. المخالفات المرصودة</span>
-<span class="section-icon">⚠️</span>
+<div class="info-row">
+<div class="info-item"><b>اسم المشروع:</b><span id="rProject"></span></div>
+<div class="info-item"><b>مسؤول السلامة:</b><span id="rSafety"></span></div>
+<div class="info-item"><b>مدير المشروع:</b><span id="rManager"></span></div>
 </div>
 
-<table>
-<thead>
-<tr>
-<th>م</th>
-<th>وصف المخالفة</th>
-<th>صورة المخالفة</th>
-<th>الملاحظات</th>
-</tr>
-</thead>
-<tbody id="rows"></tbody>
-</table>
+<div class="section">
+<div class="section-title">1. ماهي المخالفة ⚠️</div>
+<div class="box" id="rViolation"></div>
 </div>
 
-<div class="two">
-<div class="box">
-<h3>3. ملاحظات عامة ✏️</h3>
-<div class="box-content" id="rNotes"></div>
+<div class="section">
+<div class="section-title">2. صورة المخالفة 📷</div>
+<div class="photo-box" id="rImage">لا توجد صورة</div>
 </div>
 
-<div class="box">
-<h3>4. التوصيات العامة 📋</h3>
-<div class="box-content" id="rRec"></div>
-</div>
-</div>
-
-<div class="signs">
-<div class="sign">
-<h3>مسؤول السلامة</h3>
-<p>الاسم: <span id="rSafety"></span></p>
-<div class="line"></div>
-<p>التوقيع:</p>
-<div class="line"></div>
+<div class="section">
+<div class="section-title">3. ملاحظات عامة 📄</div>
+<div class="box"><ul id="rNotes"></ul></div>
 </div>
 
-<div class="sign">
-<h3>مدير المشروع</h3>
-<p>الاسم: <span id="rManager"></span></p>
-<div class="line"></div>
-<p>التوقيع:</p>
-<div class="line"></div>
-</div>
+<div class="section">
+<div class="section-title">4. توصيات عامة ✅</div>
+<div class="box"><ul id="rRec"></ul></div>
 </div>
 
-<div class="footer">تطوير وإنشاء المنصة: سامي الأسمري</div>
+<div class="footer">
+<div>📅 تاريخ التقرير: <span id="rDate"></span></div>
+<div>🛡️ السلامة مسؤوليتنا جميعاً</div>
+<div>📄 رقم التقرير: <span id="rNo"></span></div>
+</div>
 
 </div>
 
 <script>
-function readImage(id){
+function readImage(){
 return new Promise(function(resolve){
-var file=document.getElementById(id).files[0];
+var file=document.getElementById("img").files[0];
 if(!file){resolve("");return;}
 var reader=new FileReader();
 reader.onload=function(e){resolve(e.target.result);}
@@ -263,37 +238,24 @@ reader.readAsDataURL(file);
 });
 }
 
+function listFromText(text){
+return text.split("\\n").filter(Boolean).map(function(x){return "<li>"+x+"</li>";}).join("");
+}
+
 async function generate(){
 document.getElementById("report").style.display="block";
 
-var project=document.getElementById("project").value || "غير محدد";
-var safety=document.getElementById("safety").value || "";
-var manager=document.getElementById("manager").value || "";
+document.getElementById("rProject").innerText=document.getElementById("project").value || "غير محدد";
+document.getElementById("rSafety").innerText=document.getElementById("safety").value || "غير محدد";
+document.getElementById("rManager").innerText=document.getElementById("manager").value || "غير محدد";
+document.getElementById("rViolation").innerText=document.getElementById("violation").value || "لم يتم إدخال المخالفة";
+document.getElementById("rNotes").innerHTML=listFromText(document.getElementById("notes").value);
+document.getElementById("rRec").innerHTML=listFromText(document.getElementById("rec").value);
+document.getElementById("rDate").innerText=new Date().toLocaleDateString("ar-SA");
+document.getElementById("rNo").innerText="HSR-" + Date.now().toString().slice(-6);
 
-document.getElementById("rProject").innerText=project;
-document.getElementById("rSafety").innerText=safety;
-document.getElementById("rManager").innerText=manager;
-
-var violations=[
-{t:document.getElementById("v1").value || "عدم ارتداء معدات الوقاية الشخصية", img:await readImage("img1")},
-{t:document.getElementById("v2").value || "تمديدات كهربائية مكشوفة", img:await readImage("img2")},
-{t:document.getElementById("v3").value || "عدم توفر طفاية حريق صالحة", img:await readImage("img3")}
-];
-
-var html="";
-violations.forEach(function(v,i){
-html+="<tr>";
-html+="<td>"+(i+1)+"</td>";
-html+="<td>"+v.t+"</td>";
-html+="<td>"+(v.img ? "<img class='pic' src='"+v.img+"'>" : "لا توجد صورة")+"</td>";
-html+="<td class='lines'>.........................<br>.........................<br>.........................</td>";
-html+="</tr>";
-});
-document.getElementById("rows").innerHTML=html;
-
-document.getElementById("rNotes").innerText=document.getElementById("notes").value || "........................................";
-var rec=document.getElementById("rec").value.split("\\n").filter(Boolean);
-document.getElementById("rRec").innerHTML="<ul>"+rec.map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul>";
+var img=await readImage();
+document.getElementById("rImage").innerHTML=img ? "<img src='"+img+"'>" : "لا توجد صورة";
 
 setTimeout(function(){
 document.getElementById("report").scrollIntoView({behavior:"smooth"});
