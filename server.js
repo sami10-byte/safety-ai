@@ -15,7 +15,6 @@ res.send(`
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>HSE AI</title>
@@ -30,106 +29,164 @@ font-family:Arial;
 }
 
 body{
-background:#f3f4f6;
-padding:20px;
-}
-
-.navbar{
-background:#4c1d95;
-color:white;
-padding:20px;
-border-radius:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
-
-.logo{
-font-size:34px;
-font-weight:bold;
-}
-
-.creator{
-font-size:15px;
+background:#f5f5f5;
+overflow-x:hidden;
 }
 
 .hero{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-margin-bottom:25px;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
+background:
+linear-gradient(rgba(255,255,255,0.85),rgba(255,255,255,0.9)),
+url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1400');
+background-size:cover;
+background-position:center;
 }
 
-.hero h1{
-color:#4c1d95;
+.container{
+max-width:1200px;
+width:100%;
+}
+
+.top{
+text-align:center;
+margin-bottom:40px;
+}
+
+.logo{
+font-size:70px;
+margin-bottom:10px;
+}
+
+.top h1{
+font-size:58px;
+color:#065f46;
 margin-bottom:15px;
+}
+
+.top h2{
+font-size:28px;
+color:#047857;
+margin-bottom:20px;
+}
+
+.top p{
+font-size:22px;
+color:#444;
+line-height:2;
+max-width:900px;
+margin:auto;
 }
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:30px;
+margin-top:50px;
 }
 
 .card{
 background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
+border-radius:30px;
+padding:40px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+text-align:center;
+transition:0.3s;
 }
 
-.card h2{
-color:#4c1d95;
-margin-bottom:10px;
+.card:hover{
+transform:translateY(-10px);
+}
+
+.icon{
+font-size:90px;
+margin-bottom:20px;
+}
+
+.card h3{
+font-size:38px;
+margin-bottom:20px;
+color:#065f46;
+}
+
+.card p{
+font-size:22px;
+line-height:1.8;
+color:#444;
+margin-bottom:30px;
 }
 
 .btn{
 display:inline-block;
-margin-top:15px;
-background:#4c1d95;
+background:#065f46;
 color:white;
-padding:12px 20px;
-border-radius:10px;
+padding:18px 40px;
+border-radius:18px;
+font-size:24px;
 text-decoration:none;
+transition:0.3s;
+border:none;
+cursor:pointer;
+}
+
+.btn:hover{
+background:#047857;
+}
+
+.footer{
+background:#064e3b;
+color:white;
+padding:25px;
+margin-top:60px;
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+gap:20px;
+font-size:22px;
 }
 
 .ai-box{
 margin-top:30px;
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
+display:none;
 }
 
 textarea{
 width:100%;
-padding:15px;
-border-radius:12px;
+padding:20px;
+border-radius:20px;
 border:1px solid #ddd;
-margin-top:15px;
-margin-bottom:15px;
-font-size:18px;
-}
-
-button{
-background:#4c1d95;
-color:white;
-border:none;
-padding:14px 22px;
-border-radius:12px;
-font-size:18px;
-cursor:pointer;
+font-size:20px;
+margin-top:20px;
+margin-bottom:20px;
 }
 
 .answer{
+background:#ecfdf5;
+padding:25px;
+border-radius:20px;
 margin-top:20px;
-background:#f5f3ff;
-padding:20px;
-border-radius:15px;
+font-size:22px;
 line-height:2;
 display:none;
+}
+
+@media(max-width:768px){
+
+.top h1{
+font-size:40px;
+}
+
+.top h2{
+font-size:24px;
+}
+
+.card h3{
+font-size:30px;
+}
+
 }
 
 </style>
@@ -138,26 +195,25 @@ display:none;
 
 <body>
 
-<div class="navbar">
+<section class="hero">
 
-<div class="logo">
-HSE AI
-</div>
+<div class="container">
 
-<div class="creator">
-تطوير وإنشاء: سامي الأسمري
-</div>
+<div class="top">
 
-</div>
-
-<div class="hero">
+<div class="logo">🛡️</div>
 
 <h1>
-منصة الصحة والسلامة المهنية
+صحة وسلامة مهنية
 </h1>
 
+<h2>
+بيئة آمنة .. عمل مستدام
+</h2>
+
 <p>
-منصة ذكية لإدارة التقارير والمخالفات والتفتيش بالمشاريع.
+نلتزم بحماية الأرواح والممتلكات من خلال تعزيز ثقافة السلامة المهنية
+والتحسين المستمر لأداء الصحة والسلامة المهنية.
 </p>
 
 </div>
@@ -166,75 +222,111 @@ HSE AI
 
 <div class="card">
 
-<h2>
-التقارير
-</h2>
+<div class="icon">📋</div>
+
+<h3>
+تقرير صحة وسلامة مهنية
+</h3>
 
 <p>
-إنشاء تقارير سلامة احترافية.
+استعرض التقارير والإحصائيات ومؤشرات الأداء الخاصة بالصحة والسلامة المهنية.
 </p>
 
 <a href="/reports" class="btn">
-فتح
+دخول إلى التقارير
 </a>
 
 </div>
 
 <div class="card">
 
-<h2>
-الذكاء الاصطناعي
-</h2>
+<div class="icon">❓</div>
+
+<h3>
+اسألني
+</h3>
 
 <p>
-اسأل الذكاء الاصطناعي عن السلامة المهنية.
+عن أي شيء يخص صحة وسلامة مهنية
 </p>
 
-<a href="#ai" class="btn">
-فتح
-</a>
+<button class="btn" onclick="openAI()">
+اسأل الآن
+</button>
 
-</div>
+<div class="ai-box" id="aiBox">
 
-</div>
+<textarea id="question" rows="4" placeholder="اكتب سؤالك هنا"></textarea>
 
-<div class="ai-box" id="ai">
-
-<h2>
-اسأل الذكاء الاصطناعي 🤖
-</h2>
-
-<textarea id="question" rows="4"></textarea>
-
-<button onclick="askAI()">
-إرسال
+<button class="btn" onclick="askAI()">
+إرسال السؤال
 </button>
 
 <div class="answer" id="answer"></div>
 
 </div>
 
+</div>
+
+</div>
+
+<div class="footer">
+
+<div>
+🛡️ السلامة مسؤولية الجميع
+</div>
+
+<div>
+👷 نحن نهتم
+</div>
+
+<div>
+✅ نلتزم بالمعايير
+</div>
+
+<div>
+❤️ صحة اليوم .. أمان الغد
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 <script>
+
+function openAI(){
+
+document.getElementById("aiBox").style.display = "block";
+
+}
 
 async function askAI(){
 
-const q = document.getElementById("question").value;
+const question =
+document.getElementById("question").value;
 
-const res = await fetch("/ask-ai",{
+const response = await fetch("/ask-ai",{
+
 method:"POST",
+
 headers:{
 "Content-Type":"application/json"
 },
+
 body:JSON.stringify({
-question:q
+question
 })
+
 });
 
-const data = await res.json();
+const data = await response.json();
 
 document.getElementById("answer").style.display="block";
 
-document.getElementById("answer").innerHTML = data.answer;
+document.getElementById("answer").innerHTML =
+data.answer;
 
 }
 
@@ -252,9 +344,39 @@ app.post("/ask-ai",(req,res)=>{
 
 const question = req.body.question;
 
+let answer = "";
+
+if(question.includes("خوذة")){
+
+answer =
+"يجب ارتداء الخوذة الواقية داخل مواقع العمل لحماية الرأس من الأجسام الساقطة.";
+
+}
+
+else if(question.includes("حريق")){
+
+answer =
+"يجب توفير طفايات حريق صالحة وفحصها بشكل دوري داخل المشروع.";
+
+}
+
+else if(question.includes("سقوط")){
+
+answer =
+"يجب استخدام وسائل الحماية من السقوط عند العمل في المرتفعات.";
+
+}
+
+else{
+
+answer =
+"تم استلام سؤالك: " + question +
+"<br><br>سيتم تطوير الذكاء الاصطناعي لاحقًا للإجابة الاحترافية.";
+
+}
+
 res.json({
-answer:
-"الذكاء الاصطناعي استقبل سؤالك: " + question
+answer
 });
 
 });
@@ -281,63 +403,48 @@ padding:20px;
 font-family:Arial;
 }
 
-.card{
-background:white;
-padding:25px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-max-width:1100px;
+.container{
+max-width:1000px;
 margin:auto;
 }
 
+.card{
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
 h1{
-color:#4c1d95;
-margin-bottom:20px;
+color:#065f46;
+margin-bottom:25px;
 }
 
 input,textarea{
 width:100%;
-padding:15px;
-border-radius:12px;
+padding:16px;
+border-radius:15px;
 border:1px solid #ddd;
-margin-bottom:15px;
-font-size:16px;
+margin-bottom:20px;
+font-size:18px;
 }
 
 button{
-background:#4c1d95;
+background:#065f46;
 color:white;
+padding:15px 25px;
 border:none;
-padding:14px 22px;
-border-radius:12px;
-font-size:18px;
+border-radius:15px;
+font-size:20px;
 cursor:pointer;
 }
 
 .report{
 margin-top:30px;
-padding:25px;
-border:2px solid #ddd;
-border-radius:20px;
+background:white;
+padding:30px;
+border-radius:25px;
 display:none;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-th{
-background:#4c1d95;
-color:white;
-padding:12px;
-}
-
-td{
-border:1px solid #ddd;
-padding:15px;
-text-align:center;
 }
 
 </style>
@@ -345,6 +452,8 @@ text-align:center;
 </head>
 
 <body>
+
+<div class="container">
 
 <div class="card">
 
@@ -354,7 +463,7 @@ text-align:center;
 
 <input id="project" placeholder="اسم المشروع">
 
-<input id="safety" placeholder="مسؤول السلامة">
+<input id="safety" placeholder="اسم مسؤول السلامة">
 
 <textarea id="violations" rows="5" placeholder="وصف المخالفات"></textarea>
 
@@ -362,13 +471,17 @@ text-align:center;
 توليد التقرير
 </button>
 
+</div>
+
 <div class="report" id="report">
 
 <h1>
 تقرير السلامة المهنية
 </h1>
 
-<p id="reportText"></p>
+<div id="reportText"></div>
+
+<br>
 
 <button onclick="window.print()">
 طباعة PDF
@@ -391,30 +504,31 @@ document.getElementById("safety").value;
 const violations =
 document.getElementById("violations").value;
 
-const html =
+document.getElementById("report").style.display="block";
 
-"<table>" +
+document.getElementById("reportText").innerHTML =
 
-"<tr>" +
-"<th>اسم المشروع</th>" +
-"<td>" + project + "</td>" +
-"</tr>" +
+"<h2>اسم المشروع: " + project + "</h2>" +
 
-"<tr>" +
-"<th>مسؤول السلامة</th>" +
-"<td>" + safety + "</td>" +
-"</tr>" +
+"<h3>مسؤول السلامة: " + safety + "</h3>" +
 
-"<tr>" +
-"<th>وصف المخالفات</th>" +
-"<td>" + violations + "</td>" +
-"</tr>" +
+"<hr><br>" +
 
-"</table>";
+"<h3>وصف المخالفات:</h3>" +
 
-document.getElementById("reportText").innerHTML = html;
+"<p>" + violations + "</p>" +
 
-document.getElementById("report").style.display = "block";
+"<br><h3>التوصيات:</h3>" +
+
+"<ul>" +
+
+"<li>الالتزام الكامل بإجراءات السلامة.</li>" +
+
+"<li>توفير معدات الوقاية الشخصية.</li>" +
+
+"<li>متابعة تنفيذ التصحيحات.</li>" +
+
+"</ul>";
 
 }
 
@@ -430,6 +544,6 @@ document.getElementById("report").style.display = "block";
 
 app.listen(PORT, () => {
 
-console.log("Server running on port " + PORT);
+console.log("HSE AI Running on Port " + PORT);
 
 });
