@@ -177,14 +177,43 @@ button,a{background:#065f46;color:white;border:none;padding:14px 24px;border-rad
 .section{border:1px solid #ccc;border-radius:10px;margin-bottom:10px;overflow:hidden}
 .section-title{background:#065f46;color:white;padding:8px;font-weight:bold}
 .box{padding:10px;line-height:1.7;font-size:14px}
-.image-box{text-align:center}
-.image-box img{width:85%;max-height:220px;object-fit:cover;border-radius:8px}
+
+.image-box{
+  text-align:center;
+  padding:15px;
+  background:#fff;
+}
+
+.image-box img{
+  display:block;
+  margin:auto;
+  width:100%;
+  max-width:720px;
+  height:300px;
+  object-fit:contain;
+  background:white;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  padding:5px;
+}
+
 .footer{background:#065f46;color:white;padding:10px;border-radius:8px;text-align:center;margin-top:12px;font-size:13px}
+
 @media print{
   @page{size:A4 portrait;margin:8mm}
   body{background:white;padding:0;margin:0}
   .form,button,a{display:none!important}
   .report{display:block!important;width:190mm;min-height:auto;margin:0 auto;padding:8mm;box-shadow:none;border-radius:0}
+
+  .image-box{
+    padding:8px;
+  }
+
+  .image-box img{
+    max-width:650px;
+    height:240px;
+    object-fit:contain;
+  }
 }
 </style>
 </head>
@@ -266,9 +295,12 @@ function generateReport(){
   if(file){
     const reader = new FileReader();
     reader.onload = function(e){
-      document.getElementById("rImage").innerHTML = "<img src='" + e.target.result + "'>";
+      document.getElementById("rImage").innerHTML =
+        '<img src="' + e.target.result + '" alt="صورة المخالفة">';
     };
     reader.readAsDataURL(file);
+  } else {
+    document.getElementById("rImage").innerHTML = "لا توجد صورة";
   }
 
   setTimeout(() => {
